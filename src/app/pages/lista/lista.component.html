@@ -1,0 +1,7 @@
+<table class="table table-hover">
+    <tr *ngFor='let c of clientes'>
+        <td>{{c.nome}}</td>
+        <td>{{c.email}}</td>
+        <td *ngIf="c.status == true">{{c.status}}</td>
+    </tr>
+</table>
