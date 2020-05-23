@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { ClienteService } from 'src/app/providers/cliente.service';
+import { ServicoService } from '../../providers/servico.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CreateServicoCommand } from '../../models/servico';
 
 @Component({
   selector: 'app-cadastro',
@@ -8,9 +10,23 @@ import { ClienteService } from 'src/app/providers/cliente.service';
 })
 export class CadastroComponent  {
 
-  constructor(private service: ClienteService) { }
+  public form = new FormGroup({
+    titulo: new FormControl('', Validators.minLength(3)),
+    descricao: new FormControl('', Validators.minLength(10)),
+  });
 
-  public criar() : void { 
-    this.service.create();
+  constructor(private service: ServicoService) {}
+
+  public onSubmit(): void {
+    const cmd = new CreateServicoCommand();
+    cmd.titulo = this.form.value.titulo;
+    cmd.descricao = this.form.value.descricao;
+    cmd.usuario = "henrique";
+
+    // console.log(cmd);
+    this.service.create(cmd).subscribe((response) => {
+      console.log(response);
+    })
   }
+  
 }

@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ClienteService } from '../../providers/cliente.service';
+import { ServicoService } from '../../providers/servico.service';
 
 @Component({
   selector: 'app-lista',
   templateUrl: './lista.component.html',
   styleUrls: ['./lista.component.css'],
-  // providers: [ClienteService]
 })
 export class ListaComponent {
 
-  public clientes = [];
+  public servicos;
 
-  constructor(private service: ClienteService) {
-    this.clientes = service.read();
+  constructor(private service: ServicoService) {
+    this.servicos = service.read();
   }
+
 }
